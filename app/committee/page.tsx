@@ -37,9 +37,9 @@ export default async function CommitteePage() {
           {members.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {members.map((m) => (
-                <div key={m.name} className="border border-gray-200 overflow-hidden">
+                <div key={m.name} className="overflow-hidden">
                   {m.photo?.asset?.url && (
-                    <div className="relative h-56 w-full bg-gray-100">
+                    <div className="relative h-56 w-full bg-white">
                       <Image
                         src={m.photo.asset.url}
                         alt={m.name}
