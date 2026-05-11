@@ -2,9 +2,9 @@
 
 export const dynamic = 'force-dynamic'
 
-import dynamic from 'next/dynamic'
+import nextDynamic from 'next/dynamic'
 
-const NextStudio = dynamic(
+const NextStudio = nextDynamic(
   () => import('next-sanity/studio').then((mod) => mod.NextStudio),
   { ssr: false }
 )
