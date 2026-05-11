@@ -6,6 +6,8 @@ import { client } from '@/sanity/client'
 import { siteSettingsQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 
+export const revalidate = 60
+
 export const metadata: Metadata = {
   title: {
     default: 'Horsforth Harriers Running Club',
