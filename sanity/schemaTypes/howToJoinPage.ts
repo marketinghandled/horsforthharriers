@@ -1,0 +1,121 @@
+import { defineType, defineField } from 'sanity'
+
+export const howToJoinPage = defineType({
+  name: 'howToJoinPage',
+  title: 'How to Join Page',
+  type: 'document',
+  groups: [
+    { name: 'intro', title: 'Intro' },
+    { name: 'fees', title: 'Fees' },
+    { name: 'discounts', title: 'Member Benefits' },
+    { name: 'faqs', title: 'FAQs' },
+  ],
+  fields: [
+    defineField({
+      name: 'pageHeadline',
+      title: 'Page Headline',
+      type: 'string',
+      description: 'The h1 shown at the top of the page.',
+      group: 'intro',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro Paragraph',
+      type: 'text',
+      rows: 3,
+      group: 'intro',
+    }),
+    defineField({
+      name: 'feesYear',
+      title: 'Fees Year',
+      type: 'string',
+      description: 'Shown in the fees section heading, e.g. 2026/27',
+      group: 'fees',
+    }),
+    defineField({
+      name: 'feesPeriod',
+      title: 'Fees Period',
+      type: 'string',
+      description: '⚠️ The fee period appears in multiple places — update it here (How to Join page heading) AND in the Membership Application Page under "Fee Period Note" (form footer + confirmation screen). e.g. 1st April 2026 to 31st March 2027',
+      group: 'fees',
+    }),
+    defineField({
+      name: 'existingMembersBody',
+      title: 'Existing Members — Body Text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      group: 'fees',
+    }),
+    defineField({
+      name: 'rejoinFeeNote',
+      title: 'Re-joining Fee Note',
+      type: 'text',
+      rows: 2,
+      group: 'fees',
+    }),
+    defineField({
+      name: 'newMembersIntro',
+      title: 'New Members — Intro Text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      group: 'fees',
+    }),
+    defineField({
+      name: 'newMemberFees',
+      title: 'New Member Fee Rows',
+      type: 'array',
+      group: 'fees',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'period', title: 'Period', type: 'string', description: 'e.g. 1st April 2026 to 31st December 2026' }),
+          defineField({ name: 'competitivePrice', title: 'Competitive Price (£)', type: 'number' }),
+          defineField({ name: 'nonCompetitivePrice', title: 'Non-competitive Price (£)', type: 'number' }),
+        ],
+        preview: { select: { title: 'period' } },
+      }],
+    }),
+    defineField({
+      name: 'tshirtNote',
+      title: 'T-shirt Note',
+      type: 'string',
+      group: 'fees',
+    }),
+    defineField({
+      name: 'socialMembershipBody',
+      title: 'Social Membership — Body Text',
+      type: 'text',
+      rows: 2,
+      group: 'fees',
+    }),
+    defineField({
+      name: 'memberBenefitsHeading',
+      title: 'Member Benefits — Section Heading',
+      type: 'string',
+      description: 'Defaults to "Member Benefits" if left blank.',
+      group: 'discounts',
+    }),
+    defineField({
+      name: 'memberBenefitsBody',
+      title: 'Member Benefits — Body Text',
+      type: 'text',
+      rows: 3,
+      group: 'discounts',
+    }),
+    defineField({
+      name: 'faqs',
+      title: 'FAQs',
+      type: 'array',
+      group: 'faqs',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'question', title: 'Question', type: 'string' }),
+          defineField({ name: 'answer', title: 'Answer', type: 'text', rows: 3 }),
+        ],
+        preview: { select: { title: 'question' } },
+      }],
+    }),
+  ],
+  preview: { prepare: () => ({ title: 'How to Join Page' }) },
+})
