@@ -39,13 +39,14 @@ export default async function CommitteePage() {
               {members.map((m) => (
                 <div key={m.name} className="border border-gray-200 overflow-hidden">
                   {m.photo?.asset?.url && (
-                    <Image
-                      src={m.photo.asset.url}
-                      alt={m.name}
-                      width={400}
-                      height={300}
-                      className="w-full object-cover object-top"
-                    />
+                    <div className="relative h-56 w-full">
+                      <Image
+                        src={m.photo.asset.url}
+                        alt={m.name}
+                        fill
+                        className="object-cover object-top"
+                      />
+                    </div>
                   )}
                   <div className="p-5">
                     <p className="font-bold text-gray-900">{m.name}</p>
