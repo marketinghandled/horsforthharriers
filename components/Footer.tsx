@@ -151,9 +151,6 @@ export default async function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200">
           <p>&copy; {new Date().getFullYear()} {settings?.clubName ?? 'Horsforth Harriers'}. All rights reserved.</p>
-          <a href="https://marketing-handled.com" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
-            <Image src="/marketing-handled.png" alt="Marketing Handled" width={120} height={40} className="h-6 w-auto" />
-          </a>
           <div className="flex gap-5 flex-wrap justify-center">
             <Link href="/club-documents/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/club-documents/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
@@ -165,6 +162,14 @@ export default async function Footer() {
             <Image src="https://www.horsforthharriers.co.uk/wp-content/uploads/2016/03/parkrunlogo.png"
               alt="parkrun" width={60} height={20} className="h-5 w-auto grayscale" />
           </div>
+        </div>
+
+        {/* Developer credit */}
+        <div className="mt-6 pt-4 border-t border-white/10 flex justify-center items-center gap-3 text-xs text-blue-300">
+          <span>Website developed by</span>
+          <a href="https://marketing-handled.com" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-opacity">
+            <Image src="/marketing-handled.png" alt="Marketing Handled" width={160} height={50} className="h-8 w-auto" />
+          </a>
         </div>
       </div>
     </footer>
