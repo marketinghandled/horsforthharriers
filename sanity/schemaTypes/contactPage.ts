@@ -38,7 +38,7 @@ export const contactPage = defineType({
       title: 'Message Recipients',
       type: 'array',
       group: 'form',
-      description: 'People visitors can choose to send a message to. The first entry is the default.',
+      description: 'People visitors can choose to send a message to. Emails must be @horsforthharriers.co.uk addresses.',
       of: [{
         type: 'object',
         fields: [

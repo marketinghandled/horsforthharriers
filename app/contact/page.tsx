@@ -18,8 +18,11 @@ export default async function ContactPage() {
     { day: 'Thursday', description: 'Speed sessions at 6:30pm — check Harrier Hub for location' },
   ]
 
-  const recipients: { label: string; email: string }[] = page?.contactRecipients ?? []
-  const fallbackEmail = page?.email ?? 'info@horsforthharriers.co.uk'
+  const recipients: { label: string; email: string }[] = page?.contactRecipients ?? [
+    { label: 'Secretary', email: 'secretary@horsforthharriers.co.uk' },
+    { label: 'Membership', email: 'membership@horsforthharriers.co.uk' },
+  ]
+  const fallbackEmail = page?.email ?? 'secretary@horsforthharriers.co.uk'
   const mapUrl = page?.mapEmbedUrl ?? DEFAULT_MAP_URL
 
   return (

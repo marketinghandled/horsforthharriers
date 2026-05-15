@@ -33,7 +33,7 @@ function BulletSection({ section }: { section: BulletSection }) {
   return (
     <div className="mb-8">
       <p className="text-gray-900 font-semibold mb-3">{section.heading}</p>
-      {section.bullets.length > 0 && (
+      {section.bullets?.length > 0 && (
         <ul className="space-y-2 ml-1">
           {section.bullets.map((bullet, i) => (
             <li key={i} className="flex items-start gap-3 text-gray-600">

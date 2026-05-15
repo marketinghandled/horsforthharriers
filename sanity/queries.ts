@@ -3,7 +3,7 @@ import { groq } from 'next-sanity'
 // Global
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
-    clubName, tagline, logo, footerDescription
+    clubName, tagline, logo, footerDescription, emailFromAddress
   }
 `
 
@@ -66,7 +66,8 @@ export const membershipPageQuery = groq`
     pageHeadline, feePeriodNote, membershipOptions,
     confirmationIntro,
     bankAccountName, bankAccountNumber, bankSortCode,
-    noTransferContactName, noTransferContactEmail
+    noTransferContactName, noTransferContactEmail,
+    submissionsEmail
   }
 `
 
@@ -127,7 +128,7 @@ export const constitutionPageQuery = groq`
 export const kitPageQuery = groq`
   *[_type == "kitPage"][0] {
     committeeContactName, committeeContactPhone, committeeContactEmail,
-    vestDescription, tshirtDescription,
+    vestDescription, tshirtDescription, tshirtSizingNote,
     shopUrl, shopIntro,
     shopItems[] { name, price },
     vatNote, collectionAddress, sizingNote
@@ -177,7 +178,8 @@ export const clubChampionshipsPageQuery = groq`
     pageHeadline, pageSubheading,
     heroImage { asset->{ url }, hotspot, crop },
     bodyText, keyPoints,
-    races[] { raceName, date, location, url }
+    racesHeading,
+    races[] { monthLabel, dateLabel, raceName, url }
   }
 `
 

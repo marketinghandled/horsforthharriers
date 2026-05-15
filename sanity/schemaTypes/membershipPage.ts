@@ -78,6 +78,13 @@ export const membershipPage = defineType({
       type: 'string',
       group: 'confirmation',
     }),
+    defineField({
+      name: 'submissionsEmail',
+      title: 'Form Submissions Email',
+      type: 'string',
+      group: 'confirmation',
+      description: 'Must be a @horsforthharriers.co.uk address. Defaults to membership@horsforthharriers.co.uk if left blank.',
+    }),
   ],
   preview: { prepare: () => ({ title: 'Membership Application Page' }) },
 })

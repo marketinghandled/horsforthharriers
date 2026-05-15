@@ -42,6 +42,8 @@ export default async function MembershipPage() {
     noTransferContactEmail: page?.noTransferContactEmail ?? defaultPayment.noTransferContactEmail,
   }
 
+  const submissionsEmail = page?.submissionsEmail ?? 'membership@horsforthharriers.co.uk'
+
   return (
     <>
       <div className="bg-brand-light py-5 border-b border-brand-blue/20">
@@ -50,7 +52,7 @@ export default async function MembershipPage() {
         </div>
       </div>
 
-      <MembershipForm options={options} feePeriodNote={feePeriodNote} payment={payment} />
+      <MembershipForm options={options} feePeriodNote={feePeriodNote} payment={payment} submissionsEmail={submissionsEmail} />
     </>
   )
 }

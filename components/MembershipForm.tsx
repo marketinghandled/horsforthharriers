@@ -22,15 +22,17 @@ type Props = {
   options: MembershipOption[]
   feePeriodNote: string
   payment: PaymentDetails
+  submissionsEmail: string
 }
 
-export default function MembershipForm({ options, feePeriodNote, payment }: Props) {
+export default function MembershipForm({ options, feePeriodNote, payment, submissionsEmail }: Props) {
   const [selectedOption, setSelectedOption] = useState<string>('')
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
   const selectedPrice = options.find((o) => o.id === selectedOption)?.price ?? 0
 
-  if (submitted) {
+  if (status === 'sent') {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-brand-light border border-brand-blue/20 p-8 space-y-6">
@@ -114,9 +116,43 @@ export default function MembershipForm({ options, feePeriodNote, payment }: Prop
 
       {/* Form */}
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault()
-          setSubmitted(true)
+          setStatus('sending')
+          setErrorMsg('')
+          const data = new FormData(e.currentTarget)
+          const selectedOpt = options.find((o) => o.id === selectedOption)
+          const message = [
+            `Title: ${data.get('title') || '—'}`,
+            `First name: ${data.get('first_name')}`,
+            `Last name: ${data.get('last_name')}`,
+            `Gender: ${data.get('gender')}`,
+            `Date of birth: ${data.get('date_of_birth')}`,
+            `Address: ${data.get('address_line_1')}${data.get('address_line_2') ? ', ' + data.get('address_line_2') : ''}, ${data.get('post_code')}`,
+            `Home telephone: ${data.get('home_telephone') || '—'}`,
+            `Mobile: ${data.get('mobile') || '—'}`,
+            `Email: ${data.get('email')}`,
+            ``,
+            `Membership option: ${selectedOpt ? `${selectedOpt.id} — ${selectedOpt.label} (£${selectedOpt.price}.00)` : '—'}`,
+          ].join('\n')
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: `${data.get('first_name')} ${data.get('last_name')}`,
+              email: data.get('email'),
+              subject: 'Membership Application',
+              message,
+              to: submissionsEmail,
+            }),
+          })
+          if (res.ok) {
+            setStatus('sent')
+          } else {
+            const json = await res.json().catch(() => ({}))
+            setErrorMsg(json.error || 'Something went wrong. Please try again.')
+            setStatus('error')
+          }
         }}
         className="space-y-8"
       >
@@ -127,7 +163,7 @@ export default function MembershipForm({ options, feePeriodNote, payment }: Prop
             <div className="sm:col-span-2 flex flex-wrap gap-3">
               <div className="flex-none">
                 <label className="block text-xs font-medium text-gray-700 mb-1">Title</label>
-                <select className="border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand-blue">
+                <select name="title" className="border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand-blue">
                   <option value="">—</option>
                   {['Mr.', 'Mrs.', 'Miss', 'Ms.', 'Dr.', 'Prof.', 'Rev.'].map((t) => (
                     <option key={t}>{t}</option>
@@ -136,17 +172,17 @@ export default function MembershipForm({ options, feePeriodNote, payment }: Prop
               </div>
               <div className="flex-1 min-w-32">
                 <label className="block text-xs font-medium text-gray-700 mb-1">First name <span className="text-red-500">*</span></label>
-                <input required type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
+                <input required name="first_name" type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
               </div>
               <div className="flex-1 min-w-32">
                 <label className="block text-xs font-medium text-gray-700 mb-1">Last name <span className="text-red-500">*</span></label>
-                <input required type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
+                <input required name="last_name" type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
               </div>
             </div>
 
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">Gender <span className="text-red-500">*</span></label>
-              <select required className="w-full border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand-blue">
+              <select required name="gender" className="w-full border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand-blue">
                 <option value="">Select…</option>
                 <option>Male</option>
                 <option>Female</option>
@@ -155,28 +191,28 @@ export default function MembershipForm({ options, feePeriodNote, payment }: Prop
 
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">Date of birth <span className="text-red-500">*</span></label>
-              <input required type="date" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
+              <input required name="date_of_birth" type="date" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
             </div>
 
             <div className="sm:col-span-2">
               <label className="block text-xs font-medium text-gray-700 mb-1">Street address <span className="text-red-500">*</span></label>
-              <input required type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue mb-2" placeholder="Street address" />
-              <input type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue mb-2" placeholder="Address line 2" />
-              <input required type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue max-w-48" placeholder="Post code" />
+              <input required name="address_line_1" type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue mb-2" placeholder="Street address" />
+              <input name="address_line_2" type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue mb-2" placeholder="Address line 2" />
+              <input required name="post_code" type="text" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue max-w-48" placeholder="Post code" />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">Home telephone</label>
-              <input type="tel" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
+              <input name="home_telephone" type="tel" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">Mobile number</label>
-              <input type="tel" placeholder="07700 000000" pattern="^(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
+              <input name="mobile" type="tel" placeholder="07700 000000" pattern="^(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
             </div>
 
             <div className="sm:col-span-2">
               <label className="block text-xs font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
-              <input required type="email" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
+              <input required name="email" type="email" className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand-blue" />
             </div>
           </div>
         </div>
@@ -243,11 +279,16 @@ export default function MembershipForm({ options, feePeriodNote, payment }: Prop
           .
         </div>
 
+        {status === 'error' && (
+          <p className="text-sm text-red-600">{errorMsg}</p>
+        )}
+
         <button
           type="submit"
-          className="w-full py-3 bg-brand-blue text-white font-bold text-sm hover:bg-brand-dark transition-colors"
+          disabled={status === 'sending'}
+          className="w-full py-3 bg-brand-blue text-white font-bold text-sm hover:bg-brand-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Submit Application
+          {status === 'sending' ? 'Submitting…' : 'Submit Application'}
         </button>
       </form>
     </div>
