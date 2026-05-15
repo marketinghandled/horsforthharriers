@@ -21,7 +21,7 @@ export default function ContactForm({ recipients, fallbackEmail }: Props) {
     return (
       <div className="border border-green-200 bg-green-50 p-8 text-center space-y-3">
         <p className="text-lg font-bold text-green-800">Message sent!</p>
-        <p className="text-sm text-green-700">Thanks for getting in touch. We'll get back to you soon.</p>
+        <p className="text-sm text-green-700">Thanks for getting in touch. We&apos;ll get back to you soon.</p>
         <button
           onClick={() => setStatus('idle')}
           className="mt-4 px-5 py-2 border border-green-700 text-green-800 text-sm font-medium hover:bg-green-100 transition-colors"
