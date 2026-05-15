@@ -42,6 +42,13 @@ export const kitPage = defineType({
       rows: 4,
       group: 'committeeKit',
     }),
+    defineField({
+      name: 'tshirtSizingNote',
+      title: 'T-Shirt Sizing Note',
+      type: 'text',
+      rows: 2,
+      group: 'committeeKit',
+    }),
 
     // — Online shop —
     defineField({

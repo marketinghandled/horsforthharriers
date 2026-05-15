@@ -14,7 +14,20 @@ export default async function ClubChampionshipsPage() {
   const subheading = page?.pageSubheading ?? 'Race throughout the year to earn points and claim the club championship title.'
   const bodyText = page?.bodyText ?? null
   const keyPoints: string[] = page?.keyPoints ?? []
-  const races: { raceName: string; date?: string; location?: string; url?: string }[] = page?.races ?? []
+  const racesHeading = page?.racesHeading ?? 'Championship Races'
+  const races: { monthLabel?: string; dateLabel?: string; raceName: string; url?: string }[] = page?.races ?? []
+
+  // Group consecutive races by month label
+  const groupedRaces: { month: string; entries: { dateLabel?: string; raceName: string; url?: string }[] }[] = []
+  for (const race of races) {
+    const month = race.monthLabel ?? ''
+    const last = groupedRaces[groupedRaces.length - 1]
+    if (last && last.month === month) {
+      last.entries.push({ dateLabel: race.dateLabel, raceName: race.raceName, url: race.url })
+    } else {
+      groupedRaces.push({ month, entries: [{ dateLabel: race.dateLabel, raceName: race.raceName, url: race.url }] })
+    }
+  }
   const heroImageUrl: string | null = page?.heroImage?.asset?.url ?? null
 
   return (
@@ -64,38 +77,39 @@ export default async function ClubChampionshipsPage() {
               )}
               <div>
                 <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">Schedule</span>
-                <h2 className="mt-2 text-3xl font-bold text-gray-900">Championship Races</h2>
+                <h2 className="mt-2 text-3xl font-bold text-gray-900">{racesHeading}</h2>
               </div>
 
-              {races.length > 0 ? (
-                <div className="space-y-3">
-                  {races.map((race, i) => (
-                    <div key={i} className="border border-gray-200 p-4 space-y-1">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-brand-blue flex-none mt-1" />
-                          <span className="font-bold text-gray-900 text-sm">{race.raceName}</span>
+              {groupedRaces.length > 0 ? (
+                <div className="border-l-2 border-gray-300 ml-24">
+                  {groupedRaces.map((group, gi) => (
+                    group.entries.map((entry, ei) => (
+                      <div key={`${gi}-${ei}`} className="flex items-baseline gap-4 py-2 relative">
+                        {/* Month — positioned left of the border, only for first entry */}
+                        <div className="absolute right-full pr-4 w-24 text-right">
+                          {ei === 0 && (
+                            <span className="font-bold text-gray-900 text-sm uppercase tracking-wide">{group.month}</span>
+                          )}
                         </div>
-                        {race.url && (
+
+                        {/* Date — sits just after the vertical line */}
+                        <span className="text-sm text-gray-500 w-14 flex-none pl-4">{entry.dateLabel}</span>
+
+                        {/* Race name */}
+                        {entry.url ? (
                           <a
-                            href={race.url}
+                            href={entry.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs text-brand-blue font-semibold hover:underline whitespace-nowrap"
+                            className="text-sm font-medium text-brand-blue hover:underline"
                           >
-                            Entry / Info →
+                            {entry.raceName}
                           </a>
+                        ) : (
+                          <p className="text-sm font-medium text-gray-900">{entry.raceName}</p>
                         )}
                       </div>
-                      <div className="pl-5 space-y-0.5">
-                        {race.date && (
-                          <p className="text-xs text-gray-500">
-                            {new Date(race.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-                          </p>
-                        )}
-                        {race.location && <p className="text-xs text-gray-500">{race.location}</p>}
-                      </div>
-                    </div>
+                    ))
                   ))}
                 </div>
               ) : (

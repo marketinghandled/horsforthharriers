@@ -24,6 +24,7 @@ export default async function KitPage() {
   const vatNote = page?.vatNote ?? 'All prices include VAT where applicable. Collection is free of charge and postage is either Royal Mail or a tracked courier service to a UK address when purchased through our team store.'
   const collectionAddress = page?.collectionAddress ?? 'PECO Ltd, Unit 12, Springfield Commercial Centre, Bagley Lane.'
   const sizingNote = page?.sizingNote ?? 'Sizing options can be viewed on the PECO website. PECO do not accept returns based on fit, so make sure you check your dimensions against the size chart in the product description when ordering.'
+  const tshirtSizingNote = page?.tshirtSizingNote ?? 'Size guides for vests and t-shirts can be found below.'
 
   return (
     <>
@@ -83,6 +84,8 @@ export default async function KitPage() {
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed">{tshirtDescription}</p>
                 </div>
+
+                <p className="text-gray-500 text-sm leading-relaxed">{tshirtSizingNote}</p>
               </div>
             </div>
 
@@ -132,6 +135,141 @@ export default async function KitPage() {
                   <p className="text-amber-900 text-sm leading-relaxed">{sizingNote}</p>
                 </div>
               </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      {/* Size Guides */}
+      <section className="py-12 bg-brand-light border-t border-brand-blue/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Size Guides</h2>
+          <p className="text-gray-500 text-sm mb-8">All measurements in inches.</p>
+
+          <div className="grid sm:grid-cols-2 gap-8">
+
+            {/* Mens Vest */}
+            <div>
+              <h3 className="bg-gray-900 text-white font-bold text-sm px-4 py-3">Mens Vest</h3>
+              <table className="w-full text-sm border border-gray-200 border-t-0">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="px-4 py-2 text-left text-gray-500 font-medium w-1/4"></th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Chest</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Hips</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Length</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {[
+                    { size: 'XS', chest: 34, hips: 34, length: 27.5 },
+                    { size: 'S',  chest: 36, hips: 36, length: 28.5 },
+                    { size: 'M',  chest: 38, hips: 38, length: 29.5 },
+                    { size: 'L',  chest: 40, hips: 40, length: 30.5 },
+                    { size: 'XL', chest: 42, hips: 42, length: 31.5 },
+                  ].map((row, i) => (
+                    <tr key={row.size} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-4 py-2 font-bold text-gray-900">{row.size}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.chest}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.hips}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.length}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Ladies Vest */}
+            <div>
+              <h3 className="bg-gray-900 text-white font-bold text-sm px-4 py-3">Ladies Vest</h3>
+              <table className="w-full text-sm border border-gray-200 border-t-0">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="px-4 py-2 text-left text-gray-500 font-medium w-1/4"></th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Chest</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Hips</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Length</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {[
+                    { size: 'Size 8',  chest: 32, hips: 32, length: 26.5 },
+                    { size: 'Size 10', chest: 34, hips: 34, length: 27.5 },
+                    { size: 'Size 12', chest: 36, hips: 36, length: 28.5 },
+                    { size: 'Size 14', chest: 38, hips: 38, length: 29.5 },
+                    { size: 'Size 16', chest: 40, hips: 40, length: 30.5 },
+                  ].map((row, i) => (
+                    <tr key={row.size} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-4 py-2 font-bold text-gray-900">{row.size}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.chest}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.hips}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.length}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mens SST */}
+            <div>
+              <h3 className="bg-gray-900 text-white font-bold text-sm px-4 py-3">Mens SST</h3>
+              <table className="w-full text-sm border border-gray-200 border-t-0">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="px-4 py-2 text-left text-gray-500 font-medium w-1/4"></th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Chest</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Hips</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Length</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {[
+                    { size: 'XS', chest: 38, hips: 38, length: 27 },
+                    { size: 'S',  chest: 40, hips: 40, length: 28 },
+                    { size: 'M',  chest: 42, hips: 42, length: 29 },
+                    { size: 'L',  chest: 44, hips: 44, length: 30 },
+                    { size: 'XL', chest: 46, hips: 46, length: 31 },
+                  ].map((row, i) => (
+                    <tr key={row.size} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-4 py-2 font-bold text-gray-900">{row.size}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.chest}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.hips}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.length}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Ladies SST */}
+            <div>
+              <h3 className="bg-gray-900 text-white font-bold text-sm px-4 py-3">Ladies SST</h3>
+              <table className="w-full text-sm border border-gray-200 border-t-0">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="px-4 py-2 text-left text-gray-500 font-medium w-1/4"></th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Chest</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Hips</th>
+                    <th className="px-4 py-2 text-left text-gray-700 font-semibold">Length</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {[
+                    { size: 'Size 8',  chest: 34, hips: 36, length: 25 },
+                    { size: 'Size 10', chest: 36, hips: 38, length: 26 },
+                    { size: 'Size 12', chest: 38, hips: 40, length: 27 },
+                    { size: 'Size 14', chest: 40, hips: 42, length: 28 },
+                    { size: 'Size 16', chest: 42, hips: 44, length: 29 },
+                  ].map((row, i) => (
+                    <tr key={row.size} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-4 py-2 font-bold text-gray-900">{row.size}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.chest}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.hips}</td>
+                      <td className="px-4 py-2 text-gray-700">{row.length}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
 
           </div>

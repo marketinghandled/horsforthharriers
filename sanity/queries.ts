@@ -137,11 +137,8 @@ export const kitPageQuery = groq`
 
 export const ballotPageQuery = groq`
   *[_type == "ballotPage"][0] {
-    pageHeadline, contactEmail,
-    qualifySection { heading, bullets },
-    londonSection { heading, bullets },
-    notesSection { heading, bullets },
-    successSection { heading, bullets }
+    pageHeadline, introParagraph, contactEmail,
+    section { heading, bullets }
   }
 `
 

@@ -20,18 +20,19 @@ export const clubChampionshipsPage = defineType({
       name: 'keyPoints', title: 'Key Points', type: 'array', group: 'body',
       of: [{ type: 'string' }],
     }),
+    defineField({ name: 'racesHeading', title: 'Races Section Heading', type: 'string', group: 'body' }),
     defineField({
       name: 'races', title: 'Championship Races', type: 'array', group: 'body',
       of: [{
         type: 'object',
         options: { modal: { type: 'popover' } },
         fields: [
+          defineField({ name: 'monthLabel', title: 'Month (e.g. FEB, JUN/JUL)', type: 'string' }),
+          defineField({ name: 'dateLabel', title: 'Date (e.g. 1st, TBC, 10th / 17th)', type: 'string' }),
           defineField({ name: 'raceName', title: 'Race Name', type: 'string' }),
-          defineField({ name: 'date', title: 'Date', type: 'date' }),
-          defineField({ name: 'location', title: 'Location', type: 'string' }),
           defineField({ name: 'url', title: 'Entry / Info Link', type: 'url' }),
         ],
-        preview: { select: { title: 'raceName', subtitle: 'date' } },
+        preview: { select: { title: 'raceName', subtitle: 'monthLabel' } },
       }],
     }),
   ],

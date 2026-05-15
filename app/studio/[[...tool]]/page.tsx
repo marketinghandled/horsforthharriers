@@ -2,15 +2,13 @@
 
 export const dynamic = 'force-dynamic'
 
-import nextDynamic from 'next/dynamic'
-
-const NextStudio = nextDynamic(
-  () => import('next-sanity/studio').then((mod) => mod.NextStudio),
-  { ssr: false }
-)
-
+import { Studio } from 'sanity'
 import config from '@/sanity.config'
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+      <Studio config={config} />
+    </div>
+  )
 }
