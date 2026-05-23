@@ -30,7 +30,7 @@ export default async function HealthAndSafetyPage() {
           {page?.contacts?.length > 0 && (
             <div className="mb-10 border-b border-gray-200 pb-8">
               <ul className="space-y-3">
-                {page.contacts.map((contact: { name?: string; role?: string; email?: string }, i: number) => (
+                {page?.contacts.map((contact: { name?: string; role?: string; email?: string }, i: number) => (
                   <li key={i} className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-3">
                     <span className="font-semibold text-gray-900 text-sm">{contact.name}</span>
                     {contact.role && (
