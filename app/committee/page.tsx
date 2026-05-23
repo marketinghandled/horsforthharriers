@@ -5,7 +5,7 @@ import { committeePageQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Committee' }
-export const revalidate = 86400
+export const revalidate = 60
 
 interface CommitteeMember {
   name: string

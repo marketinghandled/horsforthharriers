@@ -7,7 +7,7 @@ import { howToJoinPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
 
 export const metadata: Metadata = { title: 'How to Join Us' }
-export const revalidate = 86400
+export const revalidate = 60
 
 type Faq = { question: string; answer: string }
 

@@ -5,7 +5,7 @@ import { healthAndSafetyPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
 
 export const metadata: Metadata = { title: 'Health & Safety' }
-export const revalidate = 86400
+export const revalidate = 60
 
 export default async function HealthAndSafetyPage() {
   const page = await client.fetch<Record<string, any>>(healthAndSafetyPageQuery)

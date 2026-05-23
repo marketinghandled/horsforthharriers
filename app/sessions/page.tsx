@@ -6,7 +6,7 @@ import { sessionsPageQuery } from '@/sanity/queries'
 import { MapPin, ExternalLink, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'Training Sessions' }
-export const revalidate = 86400
+export const revalidate = 60
 
 type DetailRow = { _key: string; label: string; value: string }
 

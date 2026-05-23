@@ -5,7 +5,7 @@ import { coachesPageQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Coaches' }
-export const revalidate = 86400
+export const revalidate = 60
 
 interface Coach {
   name: string

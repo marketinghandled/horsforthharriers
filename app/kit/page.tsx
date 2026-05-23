@@ -3,7 +3,7 @@ import { client } from '@/sanity/client'
 import { kitPageQuery } from '@/sanity/queries'
 
 export const metadata: Metadata = { title: 'Club Kit' }
-export const revalidate = 86400
+export const revalidate = 60
 
 export default async function KitPage() {
   const page = await client.fetch<Record<string, any>>(kitPageQuery)

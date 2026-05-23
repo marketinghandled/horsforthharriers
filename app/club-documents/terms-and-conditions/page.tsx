@@ -5,7 +5,7 @@ import { termsAndConditionsPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
 
 export const metadata: Metadata = { title: 'Terms & Conditions' }
-export const revalidate = 86400
+export const revalidate = 60
 
 export default async function TermsAndConditionsPage() {
   const page = await client.fetch<Record<string, any>>(termsAndConditionsPageQuery)

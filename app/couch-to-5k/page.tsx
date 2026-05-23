@@ -3,7 +3,7 @@ import { client } from '@/sanity/client'
 import { couchTo5kPageQuery } from '@/sanity/queries'
 
 export const metadata: Metadata = { title: 'Couch to 5K' }
-export const revalidate = 86400
+export const revalidate = 60
 
 export default async function CouchTo5KPage() {
   const page = await client.fetch<Record<string, any>>(couchTo5kPageQuery)

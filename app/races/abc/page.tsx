@@ -6,7 +6,7 @@ import PortableText from '@/components/PortableText'
 import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Apperley Bridge Canter (ABC)' }
-export const revalidate = 86400
+export const revalidate = 60
 
 export default async function AbcPage() {
   const page = await client.fetch<Record<string, any>>(abcPageQuery)

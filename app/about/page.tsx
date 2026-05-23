@@ -5,7 +5,7 @@ import { aboutPageQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'About' }
-export const revalidate = 86400
+export const revalidate = 60
 
 export default async function AboutPage() {
   const page = await client.fetch<Record<string, any>>(aboutPageQuery)
