@@ -150,7 +150,7 @@ export default async function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200">
-          <p>&copy; {new Date().getFullYear()} {settings?.clubName ?? 'Horsforth Harriers'}. All rights reserved.</p>
+          <p suppressHydrationWarning>&copy; {new Date().getFullYear()} {settings?.clubName ?? 'Horsforth Harriers'}. All rights reserved.</p>
           <div className="flex gap-5 flex-wrap justify-center">
             <Link href="/club-documents/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/club-documents/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>

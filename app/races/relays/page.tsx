@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { client } from '@/sanity/client'
 import { relaysPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
+import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Relays' }
 export const revalidate = 86400
@@ -13,8 +14,10 @@ export default async function RelaysPage() {
   const headline = page?.pageHeadline ?? 'Relays'
   const subheading = page?.pageSubheading ?? 'Team relay events the club participates in throughout the year.'
   const bodyText = page?.bodyText ?? null
+  const paragraphs = [page?.paragraph1, page?.paragraph2, page?.paragraph3].filter(Boolean) as string[]
   const relayEvents: { title: string; description?: string; url?: string }[] = page?.relayEvents ?? []
-  const heroImageUrl: string | null = page?.heroImage?.asset?.url ?? null
+  const heroImageUrl: string | null = page?.heroImage ? urlFor(page.heroImage).width(1200).url() : null
+  const galleryImages: { image: object; alt?: string; size?: 'small' | 'medium' | 'large' }[] = page?.galleryImages ?? []
 
   return (
     <>
@@ -30,7 +33,7 @@ export default async function RelaysPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200">
 
-            {/* Left — intro text */}
+            {/* Left — intro text + gallery */}
             <div className="space-y-8 pb-12 lg:pb-0 lg:pr-12">
               {bodyText && (
                 <div>
@@ -40,12 +43,40 @@ export default async function RelaysPage() {
                   </div>
                 </div>
               )}
+              {paragraphs.length > 0 && (
+                <div className="space-y-4">
+                  {paragraphs.map((text, i) => (
+                    <p key={i} className="text-gray-600 leading-relaxed">{text}</p>
+                  ))}
+                </div>
+              )}
+              {galleryImages.length > 0 && (
+                <div>
+                  <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">Gallery</span>
+                  <div className="mt-4 columns-2 gap-1">
+                    {galleryImages.map((item, i) => {
+                      if (!item?.image) return null
+                      return (
+                        <div key={i} className="break-inside-avoid mb-1">
+                          <Image
+                            src={urlFor(item.image).width(900).url()}
+                            alt={item.alt ?? ''}
+                            width={900}
+                            height={600}
+                            className="w-full h-auto block"
+                          />
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right — relay events */}
             <div className="space-y-8 pt-12 lg:pt-0 lg:pl-12">
               {heroImageUrl && (
-                <Image src={heroImageUrl} alt={headline} width={600} height={360} className="w-full h-auto" />
+                <Image src={heroImageUrl} alt={headline} width={1200} height={800} className="w-full h-auto" />
               )}
               <div>
                 <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">Events</span>
@@ -86,6 +117,7 @@ export default async function RelaysPage() {
           </div>
         </div>
       </section>
+
     </>
   )
 }

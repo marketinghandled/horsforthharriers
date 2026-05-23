@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { client } from '@/sanity/client'
 import { committeePageQuery } from '@/sanity/queries'
+import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Committee' }
 export const revalidate = 86400
@@ -41,7 +42,7 @@ export default async function CommitteePage() {
                   {m.photo?.asset?.url && (
                     <div className="relative h-56 w-full bg-white">
                       <Image
-                        src={m.photo.asset.url}
+                        src={urlFor(m.photo).width(400).url()}
                         alt={m.name}
                         fill
                         className="object-contain"

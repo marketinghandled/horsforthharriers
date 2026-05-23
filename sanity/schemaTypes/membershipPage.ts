@@ -5,10 +5,26 @@ export const membershipPage = defineType({
   title: 'Membership Application Page',
   type: 'document',
   groups: [
+    { name: 'types', title: 'Membership Types' },
     { name: 'options', title: 'Membership Options' },
     { name: 'confirmation', title: 'Confirmation & Payment' },
   ],
   fields: [
+    defineField({
+      name: 'membershipTypes',
+      title: 'Membership Types',
+      type: 'array',
+      group: 'types',
+      description: 'The 4 membership type cards shown at the top of the page. Each needs a heading and description.',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+          defineField({ name: 'description', title: 'Description', type: 'text', rows: 3 }),
+        ],
+        preview: { select: { title: 'heading', subtitle: 'description' } },
+      }],
+    }),
     defineField({
       name: 'pageHeadline',
       title: 'Page Headline',
@@ -22,6 +38,14 @@ export const membershipPage = defineType({
       type: 'string',
       description: '⚠️ The fee period appears in multiple places — update it here (shown in the form footer and on the post-submission confirmation screen) AND in the How to Join Page under "Fees Period" (shown in the fees section heading). e.g. effective from 1st April 2026 to 31st December 2026',
       group: 'options',
+    }),
+    defineField({
+      name: 'membershipNote',
+      title: 'Membership Options Note',
+      type: 'text',
+      rows: 4,
+      group: 'options',
+      description: 'The note box shown below the options table. Leave blank to use the default text.',
     }),
     defineField({
       name: 'membershipOptions',

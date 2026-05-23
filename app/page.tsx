@@ -21,7 +21,7 @@ export default async function HomePage() {
       <HeroSection
         headline={page?.heroHeadline}
         subtext={page?.heroSubtext}
-        imageUrl={page?.heroImage ? urlFor(page.heroImage).width(1920).url() : null}
+        imageUrl={page?.heroImage ? urlFor(page.heroImage).width(2400).quality(100).url() : null}
       />
 
       {/* Welcome + ABC — 50/50 split */}

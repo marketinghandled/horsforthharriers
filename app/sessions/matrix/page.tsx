@@ -107,9 +107,6 @@ export default async function TrainingMatrixPage() {
               return (
                 <div key={g} className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${style.badge}`}>
                   <span>Group {g}</span>
-                  <span className="font-normal opacity-80">
-                    {g === 'A' ? 'Advanced' : g === 'B' ? 'Intermediate' : g === 'C' ? 'Beginner / Social' : ''}
-                  </span>
                 </div>
               )
             })}
@@ -164,9 +161,7 @@ export default async function TrainingMatrixPage() {
                 <div key={g} className="rounded-lg border border-gray-200 overflow-hidden shadow-sm">
                   <div className={`${style.bg} ${style.text} px-4 py-3 flex items-center gap-3`}>
                     <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white/20 text-lg font-bold">{g}</span>
-                    <span className="font-semibold">
-                      Group {g} — {g === 'A' ? 'Advanced' : g === 'B' ? 'Intermediate' : 'Beginner / Social'}
-                    </span>
+                    <span className="font-semibold">Group {g}</span>
                   </div>
                   <div className="divide-y divide-gray-100">
                     {rows.map((row, i) => (

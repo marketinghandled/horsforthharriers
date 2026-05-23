@@ -29,6 +29,7 @@ export const abcPage = defineType({
         preview: { select: { title: 'label', subtitle: 'value' } },
       }],
     }),
+    defineField({ name: 'volunteerImage', title: 'Get Involved Image (optional)', type: 'image', options: { hotspot: true }, group: 'body' }),
     defineField({ name: 'volunteerHeading', title: 'Volunteer Section Heading', type: 'string', group: 'body' }),
     defineField({
       name: 'volunteerText', title: 'Volunteer Section Text', type: 'array',

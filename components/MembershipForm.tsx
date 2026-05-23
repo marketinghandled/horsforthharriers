@@ -18,14 +18,17 @@ type PaymentDetails = {
   noTransferContactEmail: string
 }
 
+const defaultMembershipNote = 'Options A, B, C, D, E, G & H allow full Horsforth Harriers membership rights including: All voting rights and participation in all social events and training programmes.\n\nOption F allows participation in all social events organised by Horsforth Harriers.'
+
 type Props = {
   options: MembershipOption[]
   feePeriodNote: string
+  membershipNote: string
   payment: PaymentDetails
   submissionsEmail: string
 }
 
-export default function MembershipForm({ options, feePeriodNote, payment, submissionsEmail }: Props) {
+export default function MembershipForm({ options, feePeriodNote, membershipNote, payment, submissionsEmail }: Props) {
   const [selectedOption, setSelectedOption] = useState<string>('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
@@ -104,14 +107,10 @@ export default function MembershipForm({ options, feePeriodNote, payment, submis
       </div>
 
       {/* Membership rights note */}
-      <div className="bg-gray-50 border border-gray-200 p-4 text-xs text-gray-600 mb-10 leading-relaxed">
-        <p>
-          Options <strong>A, B, C, D, E, G &amp; H</strong> allow full Horsforth Harriers membership rights
-          including: All voting rights and participation in all social events and training programmes.
-        </p>
-        <p className="mt-1.5">
-          Option <strong>F</strong> allows participation in all social events organised by Horsforth Harriers.
-        </p>
+      <div className="bg-gray-50 border border-gray-200 p-4 text-xs text-gray-600 mb-10 leading-relaxed space-y-1.5">
+        {(membershipNote || defaultMembershipNote).split('\n').filter(Boolean).map((line, i) => (
+          <p key={i}>{line}</p>
+        ))}
       </div>
 
       {/* Form */}

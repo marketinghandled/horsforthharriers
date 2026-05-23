@@ -31,8 +31,10 @@ const defaultFeePeriodNote = '1st April 2026 to 31st December 2026'
 export default async function MembershipPage() {
   const page = await client.fetch<Record<string, any>>(membershipPageQuery)
 
+  const membershipTypes: { heading: string; description: string }[] = page?.membershipTypes ?? []
   const options = page?.membershipOptions?.length ? page.membershipOptions : defaultOptions
   const feePeriodNote = page?.feePeriodNote ?? defaultFeePeriodNote
+  const membershipNote = page?.membershipNote ?? ''
   const payment = {
     confirmationIntro: page?.confirmationIntro ?? defaultPayment.confirmationIntro,
     bankAccountName: page?.bankAccountName ?? defaultPayment.bankAccountName,
@@ -52,7 +54,22 @@ export default async function MembershipPage() {
         </div>
       </div>
 
-      <MembershipForm options={options} feePeriodNote={feePeriodNote} payment={payment} submissionsEmail={submissionsEmail} />
+      {membershipTypes.length > 0 && (
+        <section className="bg-brand-light border-b border-brand-blue/20 py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {membershipTypes.map((t, i) => (
+                <div key={i} className="bg-white rounded-xl border border-brand-blue/15 p-6 space-y-2">
+                  <h3 className="font-bold text-gray-900 text-sm">{t.heading}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{t.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <MembershipForm options={options} feePeriodNote={feePeriodNote} membershipNote={membershipNote} payment={payment} submissionsEmail={submissionsEmail} />
     </>
   )
 }

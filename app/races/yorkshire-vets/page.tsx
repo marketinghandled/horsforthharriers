@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { client } from '@/sanity/client'
 import { yorkshireVetsPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
+import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Yorkshire Vets' }
 export const revalidate = 86400
@@ -15,7 +16,7 @@ export default async function YorkshireVetsPage() {
   const bodyText = page?.bodyText ?? null
   const details: { label: string; value: string }[] = page?.details ?? []
   const websiteUrl: string | null = page?.websiteUrl ?? null
-  const heroImageUrl: string | null = page?.heroImage?.asset?.url ?? null
+  const heroImageUrl: string | null = page?.heroImage ? urlFor(page.heroImage).width(600).url() : null
 
   return (
     <>
@@ -46,7 +47,7 @@ export default async function YorkshireVetsPage() {
             {/* Right — key details + link */}
             <div className="space-y-8 pt-12 lg:pt-0 lg:pl-12">
               {heroImageUrl && (
-                <Image src={heroImageUrl} alt={headline} width={600} height={360} className="w-full h-auto" />
+                <Image src={heroImageUrl} alt={headline} width={600} height={400} className="w-full h-auto" />
               )}
               <div>
                 <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">Details</span>

@@ -18,8 +18,9 @@ export const homePageQuery = groq`
 
 export const aboutPageQuery = groq`
   *[_type == "aboutPage"][0] {
-    pageHeadline, articleSubtitle, articleTitle, bodyText,
-    quoteText, quoteAttribution,
+    pageHeadline, articleSubtitle, articleTitle,
+    paragraph1, paragraph2, paragraph3, paragraph4, paragraph5, paragraph6,
+    quoteText, quoteAuthor,
     photo, founded, memberCount, joinUsText
   }
 `
@@ -63,7 +64,8 @@ export const howToJoinPageQuery = groq`
 
 export const membershipPageQuery = groq`
   *[_type == "membershipPage"][0] {
-    pageHeadline, feePeriodNote, membershipOptions,
+    pageHeadline, feePeriodNote, membershipNote, membershipOptions,
+    membershipTypes[] { heading, description },
     confirmationIntro,
     bankAccountName, bankAccountNumber, bankSortCode,
     noTransferContactName, noTransferContactEmail,
@@ -108,7 +110,8 @@ export const termsAndConditionsPageQuery = groq`
 
 export const healthAndSafetyPageQuery = groq`
   *[_type == "healthAndSafetyPage"][0] {
-    pageHeadline, bodyText
+    pageHeadline, bodyText,
+    contacts[] { name, role, email }
   }
 `
 
@@ -193,7 +196,9 @@ export const relaysPageQuery = groq`
   *[_type == "relaysPage"][0] {
     pageHeadline, pageSubheading,
     heroImage { asset->{ url }, hotspot, crop },
-    bodyText, relayEvents[] { title, description, url }
+    bodyText, paragraph1, paragraph2, paragraph3,
+    galleryImages[] { image { asset->{ url }, hotspot, crop }, alt, size },
+    relayEvents[] { title, description, url }
   }
 `
 
@@ -223,6 +228,7 @@ export const abcPageQuery = groq`
     heroImage { asset->{ url }, hotspot, crop },
     bodyText, contactEmail, entryUrl,
     details[] { label, value },
+    volunteerImage { asset->{ url }, hotspot, crop },
     volunteerHeading, volunteerText, volunteerLinkLabel, volunteerLinkUrl
   }
 `

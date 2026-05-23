@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { client } from '@/sanity/client'
 import { coachesPageQuery } from '@/sanity/queries'
+import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Coaches' }
 export const revalidate = 86400
@@ -35,15 +36,16 @@ export default async function CoachesPage() {
           {coaches.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {coaches.map((c) => (
-                <div key={c.name} className="border border-gray-200 overflow-hidden">
+                <div key={c.name} className="overflow-hidden">
                   {c.photo?.asset?.url && (
-                    <Image
-                      src={c.photo.asset.url}
-                      alt={c.name}
-                      width={400}
-                      height={300}
-                      className="w-full object-cover object-top"
-                    />
+                    <div className="relative h-56 w-full bg-white">
+                      <Image
+                        src={urlFor(c.photo).width(400).url()}
+                        alt={c.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                   )}
                   <div className="p-5">
                     <p className="font-bold text-gray-900">{c.name}</p>

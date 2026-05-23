@@ -27,6 +27,26 @@ export default async function HealthAndSafetyPage() {
 
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          {page?.contacts?.length > 0 && (
+            <div className="mb-10 border-b border-gray-200 pb-8">
+              <ul className="space-y-3">
+                {page.contacts.map((contact: { name?: string; role?: string; email?: string }, i: number) => (
+                  <li key={i} className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-3">
+                    <span className="font-semibold text-gray-900 text-sm">{contact.name}</span>
+                    {contact.role && (
+                      <span className="text-gray-500 text-sm">{contact.role}</span>
+                    )}
+                    {contact.email && (
+                      <a href={`mailto:${contact.email}`} className="text-brand-blue text-sm hover:underline sm:ml-auto">
+                        {contact.email}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {page?.bodyText ? (
             <PortableText value={page.bodyText} />
           ) : (
