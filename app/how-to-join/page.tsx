@@ -6,7 +6,10 @@ import { client } from '@/sanity/client'
 import { howToJoinPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
 
-export const metadata: Metadata = { title: 'How to Join Us' }
+export const metadata: Metadata = {
+  title: 'How to Join Us',
+  description: 'Horsforth Harriers meet every Tuesday from 6.45pm. Find out how to join one of North West Leeds\' friendliest running clubs — all abilities welcome.',
+}
 export const revalidate = 60
 
 type Faq = { question: string; answer: string }

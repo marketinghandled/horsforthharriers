@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import { client } from '@/sanity/client'
 import { couchTo5kPageQuery } from '@/sanity/queries'
 
-export const metadata: Metadata = { title: 'Couch to 5K' }
+export const metadata: Metadata = {
+  title: 'Couch to 5K',
+  description: 'A small, friendly and accessible group designed to introduce new runners to the sport. Join our Couch to 5K programme at Horsforth Harriers.',
+}
 export const revalidate = 60
 
 export default async function CouchTo5KPage() {

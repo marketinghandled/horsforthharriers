@@ -1,8 +1,14 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { client } from '@/sanity/client'
 import { homePageQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 import HeroSection from '@/components/HeroSection'
+
+export const metadata: Metadata = {
+  title: 'Horsforth Harriers Running Club',
+  description: 'We are widely regarded in the running community as one of the friendliest clubs in North West Leeds. We welcome all abilities – from new runners through to experienced competitors.',
+}
 import PortableText from '@/components/PortableText'
 import { ArrowRight } from 'lucide-react'
 

@@ -4,7 +4,10 @@ import { client } from '@/sanity/client'
 import { aboutPageQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 
-export const metadata: Metadata = { title: 'About' }
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Learn about Horsforth Harriers Running Club — one of the friendliest clubs in North West Leeds, welcoming runners of all abilities since our founding.',
+}
 export const revalidate = 60
 
 export default async function AboutPage() {

@@ -5,7 +5,10 @@ import { client } from '@/sanity/client'
 import { sessionsPageQuery } from '@/sanity/queries'
 import { MapPin, ExternalLink, ArrowRight } from 'lucide-react'
 
-export const metadata: Metadata = { title: 'Training Sessions' }
+export const metadata: Metadata = {
+  title: 'Training Sessions',
+  description: 'Horsforth Harriers meet up on a Tuesday night from 18.45. View our training groups, pacing information, and session details for all abilities.',
+}
 export const revalidate = 60
 
 type DetailRow = { _key: string; label: string; value: string }

@@ -9,6 +9,7 @@ import { urlFor } from '@/sanity/image'
 export const revalidate = 60
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.horsforthharriers.co.uk'),
   title: {
     default: 'Horsforth Harriers Running Club',
     template: '%s | Horsforth Harriers',

@@ -4,7 +4,10 @@ import { contactPageQuery } from '@/sanity/queries'
 import { MapPin, Clock, Mail, Facebook, Instagram } from 'lucide-react'
 import ContactForm from './ContactForm'
 
-export const metadata: Metadata = { title: 'Contact' }
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Get in touch with Horsforth Harriers Running Club. Contact the committee, secretary or membership team — we\'re based at King George\'s Fields, Brownberrie Lane, Horsforth.',
+}
 export const revalidate = 60
 
 const DEFAULT_MAP_URL =

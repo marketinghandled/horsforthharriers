@@ -3,7 +3,10 @@ import { client } from '@/sanity/client'
 import { membershipPageQuery } from '@/sanity/queries'
 import MembershipForm from '@/components/MembershipForm'
 
-export const metadata: Metadata = { title: 'Membership Application' }
+export const metadata: Metadata = {
+  title: 'Membership Application',
+  description: 'Join Horsforth Harriers Running Club. Submit your membership application online and find out about our membership options and annual fees.',
+}
 export const revalidate = 60
 
 const defaultOptions = [
