@@ -48,6 +48,7 @@ export default function ContactForm({ recipients, fallbackEmail }: Props) {
             subject: data.get('subject'),
             message: data.get('message'),
             to: recipientEmail || fallbackEmail,
+            _hp: data.get('_hp'),
           }),
         })
         if (res.ok) {
@@ -119,6 +120,12 @@ export default function ContactForm({ recipients, fallbackEmail }: Props) {
           required
           className="w-full px-4 py-3 border border-gray-300 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none text-sm resize-none"
         />
+      </div>
+
+      {/* Honeypot: visually hidden, bots fill it, humans don't */}
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+        <label htmlFor="_hp">Leave this blank</label>
+        <input id="_hp" name="_hp" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {status === 'error' && (

@@ -143,6 +143,7 @@ export default function MembershipForm({ options, feePeriodNote, membershipNote,
               subject: 'Membership Application',
               message,
               to: submissionsEmail,
+              _hp: data.get('_hp'),
             }),
           })
           if (res.ok) {
@@ -276,6 +277,12 @@ export default function MembershipForm({ options, feePeriodNote, membershipNote,
             dataprotection@englandathletics.org
           </a>
           .
+        </div>
+
+        {/* Honeypot: visually hidden, bots fill it, humans don't */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+          <label htmlFor="_hp_membership">Leave this blank</label>
+          <input id="_hp_membership" name="_hp" type="text" tabIndex={-1} autoComplete="off" />
         </div>
 
         {status === 'error' && (

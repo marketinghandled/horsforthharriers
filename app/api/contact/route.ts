@@ -7,7 +7,12 @@ export async function POST(request: Request) {
   const resend = new Resend(process.env.RESEND_API_KEY)
 
   const body = await request.json()
-  const { name, email, subject, message, to } = body
+  const { name, email, subject, message, to, _hp } = body
+
+  // Honeypot: bots fill this hidden field, humans don't
+  if (_hp) {
+    return NextResponse.json({ ok: true })
+  }
 
   if (typeof to !== 'string' || !to.endsWith('@horsforthharriers.co.uk')) {
     return NextResponse.json({ error: 'Invalid recipient' }, { status: 400 })
