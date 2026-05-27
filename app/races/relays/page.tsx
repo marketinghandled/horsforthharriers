@@ -53,7 +53,7 @@ export default async function RelaysPage() {
               {galleryImages.length > 0 && (
                 <div>
                   <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">Gallery</span>
-                  <div className="mt-4 columns-2 gap-1">
+                  <div className="mt-4 columns-1 sm:columns-2 gap-2">
                     {galleryImages.map((item, i) => {
                       if (!item?.image) return null
                       return (

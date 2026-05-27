@@ -23,8 +23,11 @@ export default function HeroSection({ headline, subtext, imageUrl }: HeroSection
 
   useEffect(() => {
     const handleScroll = () => {
-      if (imgRef.current) {
+      // Only apply parallax on larger screens where it looks good
+      if (imgRef.current && window.innerWidth >= 768) {
         imgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px)`
+      } else if (imgRef.current) {
+        imgRef.current.style.transform = 'none'
       }
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -33,27 +36,26 @@ export default function HeroSection({ headline, subtext, imageUrl }: HeroSection
 
   return (
     <section
-      className="relative flex flex-col bg-brand-dark overflow-hidden"
-      style={{ minHeight: 'calc(100vh - var(--nav-h, 85px))' }}
+      className="relative flex flex-col bg-brand-dark overflow-hidden min-h-[60vh] md:min-h-[calc(100vh-85px)]"
     >
       <div
         ref={imgRef}
         className="absolute will-change-transform"
-        style={{ inset: '-25% 0' }}
+        style={{ inset: '-10% 0 0' }}
       >
         <Image
           src={imageUrl ?? '/harriers-group.jpg'}
           alt="Horsforth Harriers"
           fill
           sizes="100vw"
-          quality={100}
-          className="object-cover opacity-50"
+          quality={90}
+          className="object-cover object-top opacity-50"
           priority
         />
       </div>
 
       {/* Main content */}
-      <div className="relative flex-1 flex items-end w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-24">
+      <div className="relative flex-1 flex items-end w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 md:pb-16 pt-16 md:pt-24">
         <div className="max-w-2xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-3 leading-tight">
             {headline ?? 'Welcome to Horsforth Harriers'}
