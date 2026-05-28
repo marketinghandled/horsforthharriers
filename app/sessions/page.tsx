@@ -63,8 +63,35 @@ export default async function SessionsPage() {
 
   const mapSrc = tuesdayMapEmbedUrl ?? `https://maps.google.com/maps?q=${encodeURIComponent(tuesdayLocationAddress)}&output=embed`
 
+  const tuesdayJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: tuesdayHeadline,
+    organizer: {
+      '@type': 'SportsOrganization',
+      name: 'Horsforth Harriers',
+      url: 'https://www.horsforthharriers.co.uk',
+    },
+    performer: {
+      '@type': 'SportsOrganization',
+      name: 'Horsforth Harriers',
+      url: 'https://www.horsforthharriers.co.uk',
+    },
+    location: {
+      '@type': 'Place',
+      name: tuesdayLocationName,
+      address: tuesdayLocationAddress,
+    },
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(tuesdayJsonLd) }}
+      />
       {/* Header */}
       <div className="bg-brand-light py-5 border-b border-brand-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

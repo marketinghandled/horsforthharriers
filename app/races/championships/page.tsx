@@ -31,8 +31,30 @@ export default async function ClubChampionshipsPage() {
   }
   const heroImageUrl: string | null = page?.heroImage ? urlFor(page.heroImage).width(600).url() : null
 
+  const champsJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsEvent',
+    name: headline,
+    organizer: {
+      '@type': 'SportsOrganization',
+      name: 'Horsforth Harriers',
+      url: 'https://www.horsforthharriers.co.uk',
+    },
+    performer: {
+      '@type': 'SportsOrganization',
+      name: 'Horsforth Harriers',
+      url: 'https://www.horsforthharriers.co.uk',
+    },
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(champsJsonLd) }}
+      />
       <div className="bg-brand-light py-5 border-b border-brand-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-brand-blue font-semibold text-xs uppercase tracking-widest mb-1">Races</p>
