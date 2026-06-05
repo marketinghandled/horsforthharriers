@@ -37,6 +37,21 @@ export const abcPage = defineType({
     }),
     defineField({ name: 'volunteerLinkLabel', title: 'Volunteer Link Label', type: 'string', group: 'body', description: 'e.g. Sign up to volunteer' }),
     defineField({ name: 'volunteerLinkUrl', title: 'Volunteer Link URL', type: 'url', group: 'body' }),
+
+    defineField({ name: 'stravaUrl', title: 'Strava Route URL', type: 'url', group: 'body', description: 'Link to the Strava route for the ABC course.' }),
+    defineField({
+      name: 'courseRecordImages',
+      title: 'Course Record Images',
+      type: 'array',
+      group: 'body',
+      description: 'Upload images of the course records (e.g. photos of the record board). Multiple images display side by side.',
+      of: [{
+        type: 'image',
+        options: { hotspot: true },
+        fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the image, e.g. "Men\'s course record board"' })],
+      }],
+    }),
+    defineField({ name: 'youtubeUrl', title: 'YouTube Video URL', type: 'url', group: 'body', description: 'Paste a full YouTube link, e.g. https://www.youtube.com/watch?v=abc123 — it will embed automatically on the page.' }),
   ],
   preview: { prepare: () => ({ title: 'ABC Page' }) },
 })

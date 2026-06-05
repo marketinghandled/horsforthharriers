@@ -229,6 +229,8 @@ export const abcPageQuery = groq`
     bodyText, contactEmail, entryUrl,
     details[] { label, value },
     volunteerImage { asset->{ url }, hotspot, crop },
-    volunteerHeading, volunteerText, volunteerLinkLabel, volunteerLinkUrl
+    volunteerHeading, volunteerText, volunteerLinkLabel, volunteerLinkUrl,
+    stravaUrl, youtubeUrl,
+    courseRecordImages[] { asset->{ url }, hotspot, crop, alt }
   }
 `

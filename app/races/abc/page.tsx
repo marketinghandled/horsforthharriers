@@ -23,6 +23,10 @@ export default async function AbcPage() {
   const volunteerLinkUrl: string | null = page?.volunteerLinkUrl ?? null
   const heroImageUrl: string | null = page?.heroImage ? urlFor(page.heroImage).width(600).url() : null
   const volunteerImageUrl: string | null = page?.volunteerImage ? urlFor(page.volunteerImage).width(600).url() : null
+  const stravaUrl: string | null = page?.stravaUrl ?? null
+  const youtubeUrl: string | null = page?.youtubeUrl ?? null
+  const courseRecordImages: { asset: { url: string }; alt?: string }[] = page?.courseRecordImages ?? []
+  const youtubeId = youtubeUrl?.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/)?.[1] ?? null
 
   const abcJsonLd = {
     '@context': 'https://schema.org',
@@ -127,6 +131,67 @@ export default async function AbcPage() {
           </div>
         </div>
       </section>
+
+      {/* Strava / course records / video */}
+      {(stravaUrl || courseRecordImages.length > 0 || youtubeId) && (
+        <section className="border-t border-gray-200 bg-white py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+            {stravaUrl && (
+              <div>
+                <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">The Route</span>
+                <div className="mt-4">
+                  <a
+                    href={stravaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-bold text-sm hover:bg-brand-dark transition-colors"
+                  >
+                    View route on Strava
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {courseRecordImages.length > 0 && (
+              <div>
+                <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">Course Records</span>
+                <div className={`mt-4 grid gap-4 ${courseRecordImages.length > 1 ? 'sm:grid-cols-2' : 'max-w-lg'}`}>
+                  {courseRecordImages.map((img, i) => (
+                    <Image
+                      key={i}
+                      src={urlFor(img).width(800).url()}
+                      alt={img.alt ?? 'Course record'}
+                      width={800}
+                      height={500}
+                      className="w-full h-auto"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {youtubeId && (
+              <div>
+                <span className="text-brand-blue font-semibold text-xs uppercase tracking-widest">On the Course</span>
+                <div className="mt-4 relative aspect-video max-w-3xl">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+                    title="ABC race video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
+              </div>
+            )}
+
+          </div>
+        </section>
+      )}
 
       {/* Volunteer section */}
       <section className="border-t border-gray-200 bg-brand-light py-12">
