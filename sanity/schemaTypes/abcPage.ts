@@ -29,15 +29,6 @@ export const abcPage = defineType({
         preview: { select: { title: 'label', subtitle: 'value' } },
       }],
     }),
-    defineField({ name: 'volunteerImage', title: 'Get Involved Image (optional)', type: 'image', options: { hotspot: true }, group: 'body' }),
-    defineField({ name: 'volunteerHeading', title: 'Volunteer Section Heading', type: 'string', group: 'body' }),
-    defineField({
-      name: 'volunteerText', title: 'Volunteer Section Text', type: 'array',
-      of: [{ type: 'block' }], group: 'body',
-    }),
-    defineField({ name: 'volunteerLinkLabel', title: 'Volunteer Link Label', type: 'string', group: 'body', description: 'e.g. Sign up to volunteer' }),
-    defineField({ name: 'volunteerLinkUrl', title: 'Volunteer Link URL', type: 'url', group: 'body' }),
-
     defineField({ name: 'stravaUrl', title: 'Strava Route URL', type: 'url', group: 'body', description: 'Link to the Strava route for the ABC course.' }),
     defineField({
       name: 'courseRecordImages',
@@ -52,6 +43,15 @@ export const abcPage = defineType({
       }],
     }),
     defineField({ name: 'youtubeUrl', title: 'YouTube Video URL', type: 'url', group: 'body', description: 'Paste a full YouTube link, e.g. https://www.youtube.com/watch?v=abc123 — it will embed automatically on the page.' }),
+
+    defineField({ name: 'volunteerImage', title: 'Get Involved Image (optional)', type: 'image', options: { hotspot: true }, group: 'body' }),
+    defineField({ name: 'volunteerHeading', title: 'Volunteer Section Heading', type: 'string', group: 'body' }),
+    defineField({
+      name: 'volunteerText', title: 'Volunteer Section Text', type: 'array',
+      of: [{ type: 'block' }], group: 'body',
+    }),
+    defineField({ name: 'volunteerLinkLabel', title: 'Volunteer Link Label', type: 'string', group: 'body', description: 'e.g. Sign up to volunteer' }),
+    defineField({ name: 'volunteerLinkUrl', title: 'Volunteer Link URL', type: 'url', group: 'body' }),
   ],
   preview: { prepare: () => ({ title: 'ABC Page' }) },
 })
