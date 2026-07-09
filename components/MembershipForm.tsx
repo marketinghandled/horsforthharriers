@@ -162,8 +162,8 @@ export default function MembershipForm({ options, feePeriodNote, membershipNote,
           <div className="grid sm:grid-cols-2 gap-5">
             <div className="sm:col-span-2 flex flex-wrap gap-3">
               <div className="flex-none">
-                <label className="block text-xs font-medium text-gray-700 mb-1">Title</label>
-                <select name="title" className="border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand-blue">
+                <label className="block text-xs font-medium text-gray-700 mb-1">Title <span className="text-red-500">*</span></label>
+                <select required name="title" className="border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand-blue">
                   <option value="">—</option>
                   {['Mr.', 'Mrs.', 'Miss', 'Ms.', 'Dr.', 'Prof.', 'Rev.'].map((t) => (
                     <option key={t}>{t}</option>
