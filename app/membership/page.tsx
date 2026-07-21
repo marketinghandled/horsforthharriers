@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Membership Application',
   description: 'Join Horsforth Harriers Running Club. Submit your membership application online and find out about our membership options and annual fees.',
 }
-export const revalidate = 60
+export const revalidate = 3600
 
 const defaultOptions = [
   { id: 'A', label: 'Competitive Membership Fee – existing members', detail: 'Includes England Athletics Competition Licence. By selecting this option and providing payment you will receive an EA Competition licence entitling you to compete in all EA events as an affiliated member of Horsforth Harriers.', price: 40 },

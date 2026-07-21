@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'How to Join Us',
   description: 'Horsforth Harriers meet every Tuesday from 6.45pm. Find out how to join one of North West Leeds\' friendliest running clubs — all abilities welcome.',
 }
-export const revalidate = 60
+export const revalidate = 3600
 
 type Faq = { question: string; answer: string }
 

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Training Sessions',
   description: 'Horsforth Harriers meet up on a Tuesday night from 18.45. View our training groups, pacing information, and session details for all abilities.',
 }
-export const revalidate = 60
+export const revalidate = 3600
 
 type DetailRow = { _key: string; label: string; value: string }
 

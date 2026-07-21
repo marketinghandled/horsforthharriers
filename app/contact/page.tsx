@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Contact',
   description: 'Get in touch with Horsforth Harriers Running Club. Contact the committee, secretary or membership team — we\'re based at King George\'s Fields, Brownberrie Lane, Horsforth.',
 }
-export const revalidate = 60
+export const revalidate = 3600
 
 const DEFAULT_MAP_URL =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2354.602891632922!2d-1.6487921032104307!3d53.8321401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487959387affd175%3A0x7eb6ffc8ad934ec0!2sHorsforth%20Brewery%20and%20Taproom!5e0!3m2!1sen!2suk!4v1778325543614!5m2!1sen!2suk'

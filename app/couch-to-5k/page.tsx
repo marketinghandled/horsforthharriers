@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Couch to 5K',
   description: 'A small, friendly and accessible group designed to introduce new runners to the sport. Join our Couch to 5K programme at Horsforth Harriers.',
 }
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function CouchTo5KPage() {
   const page = await client.fetch<Record<string, any>>(couchTo5kPageQuery)

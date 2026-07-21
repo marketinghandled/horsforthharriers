@@ -5,7 +5,7 @@ import { privacyPolicyPageQuery } from '@/sanity/queries'
 import PortableText from '@/components/PortableText'
 
 export const metadata: Metadata = { title: 'Privacy Policy' }
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function PrivacyPolicyPage() {
   const page = await client.fetch<Record<string, any>>(privacyPolicyPageQuery)

@@ -6,7 +6,7 @@ import { client } from '@/sanity/client'
 import { siteSettingsQuery } from '@/sanity/queries'
 import { urlFor } from '@/sanity/image'
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.horsforthharriers.co.uk'),

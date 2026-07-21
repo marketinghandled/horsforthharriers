@@ -6,7 +6,7 @@ import PortableText from '@/components/PortableText'
 import { urlFor } from '@/sanity/image'
 
 export const metadata: Metadata = { title: 'Yorkshire Vets' }
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function YorkshireVetsPage() {
   const page = await client.fetch<Record<string, any>>(yorkshireVetsPageQuery)

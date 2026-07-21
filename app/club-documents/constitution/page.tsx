@@ -5,7 +5,7 @@ import { constitutionPageQuery } from '@/sanity/queries'
 import ConstitutionAccordion from '@/components/ConstitutionAccordion'
 
 export const metadata: Metadata = { title: 'Club Constitution' }
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function ConstitutionPage() {
   const page = await client.fetch<{ pageHeadline?: string; sections?: { title: string; body?: any[] }[] } | null>(constitutionPageQuery)

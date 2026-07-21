@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'About Us',
   description: 'Learn about Horsforth Harriers Running Club — one of the friendliest clubs in North West Leeds, welcoming runners of all abilities since our founding.',
 }
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function AboutPage() {
   const page = await client.fetch<Record<string, any>>(aboutPageQuery)

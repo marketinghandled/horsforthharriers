@@ -4,7 +4,7 @@ import { client } from '@/sanity/client'
 import { ballotPageQuery } from '@/sanity/queries'
 
 export const metadata: Metadata = { title: 'Club Ballot' }
-export const revalidate = 60
+export const revalidate = 3600
 
 const DEFAULTS = {
   pageHeadline: 'Club Ballot',
